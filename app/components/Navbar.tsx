@@ -3,20 +3,22 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import NavItem from './NavItem';
+import { User } from '@prisma/client';
 
-const Navbar = () => {
+interface NavbarProps {
+  currentUser?: User | null;
+}
+
+const Navbar = ({currentUser}: NavbarProps) => {
   const [menu, setMenu] = useState(false);
-  const [render, setRender] = useState(false);
+  console.log('nav',currentUser)
+  // const [render, setRender] = useState(false);
   const handleMenu = () => {
     setMenu(!menu);
-    console.log(menu)
   };
 
-  useEffect(() => {
-    setRender(true);
-  }, [])
 
-  return render && (
+  return /* render && */ (
     <nav className='relative z-10 w-full bg-orange-500 text-white'>
       <div className='flex items-center justify-between mx-5 sm:mx-10 lg:mx-20'>
         <div className="flex items-center text-2xl h-14">
@@ -30,12 +32,12 @@ const Navbar = () => {
         </div>
 
         <div className='hidden sm:block'>
-          <NavItem />
+          <NavItem currentUser={currentUser} />
         </div>
       </div>
 
       <div className='block sm:hidden'>
-        {menu ? <NavItem mobile /> : null}
+        {menu ? <NavItem mobile  currentUser={currentUser} /> : null}
       </div>
     </nav>
   );
