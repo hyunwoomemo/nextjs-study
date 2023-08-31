@@ -16,7 +16,7 @@ export const authOptions = {
         password: { label: 'Password', type: 'password' }
       },
       async authorize(credentials, req) {
-        const user = { id: '1', nqame: 'hyunwoo', email: 'hyunwoo@example.com', role: 'User' }
+        const user = { id: '1', nqame: 'hyunwoo', email: 'hyunwoo@example.com', role: 'Admin' }
 
         if (user) {
           return user
@@ -34,11 +34,12 @@ export const authOptions = {
     secret: process.env.JWT_SECRET,
     maxAge: 30 * 24 * 60 * 60,
   },
+  pages: {
+    signIn: '/auth/login'
+  },
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
     async jwt({ token, user }) {
-      console.log('token', token)
-      console.log('user', user)
       return { ...token, ...user }
     },
     async session({ session, token }) {
