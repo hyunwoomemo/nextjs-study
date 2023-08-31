@@ -13,7 +13,7 @@ export async function middleware(req: NextRequest) {
   }
 
   // 어드민 유저만 접근 가능
-  if (pathname.startsWith('/admin') && (session?.role !== 'admin')) {
+  if (pathname.startsWith('/admin') && (session?.role !== 'Admin')) {
     return NextResponse.redirect(new URL('/', req.url))
   }
 
