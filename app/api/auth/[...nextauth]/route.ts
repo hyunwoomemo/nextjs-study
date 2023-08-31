@@ -4,6 +4,7 @@ import NextAuth from 'next-auth/next';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { PrismaClient } from '@prisma/client';
 import prisma from '@/helpers/prismadb'
+import bcrypt from 'bcryptjs'
 
 export const authOptions = {
   adapter: PrismaAdapter(prisma),
@@ -11,18 +12,34 @@ export const authOptions = {
     CredentialsProvider({
       name: 'credentials',
       credentials: {
-        username: { label: 'Username', type: 'text' },
+        email: { label: 'Email', type: 'text' },
         password: { label: 'Password', type: 'password' }
       },
       async authorize(credentials, req) {
-        const user = { id: '1', nqame: 'hyunwoo', email: 'hyunwoo@example.com', role: 'Admin' }
-
-        if (user) {
-          return user
-        } else {
-          return null
+        if (!credentials?.email || !credentials?.password) {
+          throw new Error('Invalid credentials')
         }
 
+        const user = await prisma.user.findUnique({
+          where: {
+            email: credentials.email
+          }
+        })
+
+        if (!user || !user?.hashedPassword) {
+          throw new Error('Invalid credentials');
+        }
+
+        const isCorrectPassword = await bcrypt.compare(
+          credentials.password,
+          user.hashedPassword
+        )
+
+        if (!isCorrectPassword) {
+          throw new Error('invalid credentials');
+        }
+
+        return user;
       }
     })
   ],
