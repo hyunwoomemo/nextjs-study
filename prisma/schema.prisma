@@ -54,7 +54,9 @@ model User {
   accounts       Account[]
   sessions       Session[]
 
-  userType UserType @default(User)
+  userType UserType  @default(User)
+  Product  Product[]
+  favoriteIds String[]
 }
 
 model VerificationRequest {
@@ -66,4 +68,20 @@ model VerificationRequest {
   updatedAt  DateTime @updatedAt
 
   @@unique([identifier, token])
+}
+
+model Product {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  imageSrc    String
+  category    String
+  userId      String
+  price       Int
+  latitue     Float
+  longitude   Float
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
