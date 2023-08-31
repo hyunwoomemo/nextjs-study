@@ -13,11 +13,11 @@ export const authOptions = {
       name: 'credentials',
       credentials: {
         username: { label: 'Username', type: 'text' },
-        password: { label: 'Password', type: 'password'}
+        password: { label: 'Password', type: 'password' }
       },
       async authorize(credentials, req) {
-        const user = { id: '1', name: 'hyunwoo', email: 'hyunwoo@example.com' }
-        
+        const user = { id: '1', nqame: 'hyunwoo', email: 'hyunwoo@example.com', role: 'User' }
+
         if (user) {
           return user
         } else {
@@ -30,9 +30,24 @@ export const authOptions = {
   session: {
     strategy: 'jwt'
   },
-  secret: process.env.NEXTAUTH_SECRET
+  jwt: {
+    secret: process.env.JWT_SECRET,
+    maxAge: 30 * 24 * 60 * 60,
+  },
+  secret: process.env.NEXTAUTH_SECRET,
+  callbacks: {
+    async jwt({ token, user }) {
+      console.log('token', token)
+      console.log('user', user)
+      return { ...token, ...user }
+    },
+    async session({ session, token }) {
+      session.user = token;
+      return session
+    }
+  }
 }
 
 const handler = NextAuth(authOptions)
 
-export {handler as GET, handler as POST}
+export { handler as GET, handler as POST }
