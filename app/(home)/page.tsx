@@ -34,7 +34,6 @@ export default async function Home({ searchParams }: HomeProps) {
                 )
               })
             }
-            <ProductCard />
           </div>
         </>
       }
