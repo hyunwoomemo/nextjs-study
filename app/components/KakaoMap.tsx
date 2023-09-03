@@ -17,14 +17,13 @@ const KakaoMap = ({
   const handleClick = (mouseEvent: kakao.maps.event.MouseEvent) => {
     console.log(mouseEvent)
     if (detailPage) return;
-    setCustomValue!('latitue', mouseEvent.latLng.getLat());
+    setCustomValue!('latitude', mouseEvent.latLng.getLat());
     setCustomValue!('longitude', mouseEvent.latLng.getLng());
   }
   return (
     <Map
       center={{ lat: latitude, lng: longitude }}
       style={{ width: "100%", height: "360px" }}
-      onClick={(_,mouseEvent) => handleClick(mouseEvent)}
     >
       <MapMarker position={{ lat: latitude, lng: longitude }}>
       </MapMarker>
