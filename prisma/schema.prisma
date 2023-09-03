@@ -78,7 +78,7 @@ model Product {
   category    String
   userId      String
   price       Int
-  latitue     Float
+  latitude     Float
   longitude   Float
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
