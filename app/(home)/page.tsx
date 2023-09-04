@@ -13,7 +13,6 @@ interface HomeProps {
 export default async function Home({ searchParams }: HomeProps) {
   const products = await getProducts(searchParams)
   const currentUser = await getCurrentUser();
-  console.log(products)
   return (
     <Container>
       {/* categories */}
