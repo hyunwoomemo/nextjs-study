@@ -20,7 +20,10 @@ const ProductCard = ({ data, currentUser }: ProdcutCardProps) => {
         <div className="relative w-full overflow-hidden aspect-square rounded-xl">
           <Image src={data.imageSrc} fill sizes="auto" className="object-cover w-full h-full transition group-hover:scale-110" alt="product" />
           <div className='absolute top-3 right-3'>
-            <HeartButton />
+            <HeartButton
+              productId={data.id}
+              currentUser={currentUser}
+            />
           </div>
         </div>
 
