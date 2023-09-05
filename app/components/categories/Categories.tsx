@@ -1,8 +1,12 @@
+'use client'
+
 import React from 'react'
 import { TbBeach, TbMountain, TbPool } from 'react-icons/tb'
 import {GiBoatFishing, GiIsland, GiWindmill} from 'react-icons/gi'
 import { MdOutlineVilla} from 'react-icons/md'
 import {FaSkiing} from 'react-icons/fa'
+import { useSearchParams } from 'next/navigation'
+import CategoryBox from '../CategoryBox'
 
 export const categories = [
   {
@@ -22,7 +26,7 @@ export const categories = [
     path: 'interior',
     icon: MdOutlineVilla,
     description: '가구/인테리어 카테고리입니다.'
-},
+  },
   {
     label: '여성의류',
     path: 'women-clothing',
@@ -53,4 +57,27 @@ export const categories = [
     icon: FaSkiing,
     description: '중고차 카테고리입니다.'
   },
-]
+];
+
+const Categories = () => {
+  const params = useSearchParams();
+  console.log(params)
+  const category = params?.get('category')
+  return (
+    <div
+      className='flex flex-row items-center justify-between pt-4 overflow-x-auto'
+    >
+      {categories.map((item) => (
+        <CategoryBox
+          key={item.label}
+          label={item.label}
+          path={item.path}
+          icon={item.icon}
+          selected={category === item.path}
+          />
+      ))}
+    </div>
+  )
+}
+
+export default Categories
