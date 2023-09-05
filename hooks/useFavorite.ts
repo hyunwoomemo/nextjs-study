@@ -13,7 +13,6 @@ interface UseFavoriteProps {
 
 const useFavorite = ({ productId, currentUser }: UseFavoriteProps) => {
   const router = useRouter()
-  console.log(currentUser)
 
   const hasFavorite = useMemo(() => {
     const list = currentUser?.favoriteIds || [];
@@ -23,7 +22,6 @@ const useFavorite = ({ productId, currentUser }: UseFavoriteProps) => {
   const toggleFavorite = async (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
 
-    console.log(currentUser, productId)
     if (!currentUser) {
       toast.warning('먼저 로그인을 해주세요.')
       return;
