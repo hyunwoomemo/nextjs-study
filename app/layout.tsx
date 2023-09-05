@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import Navbar from './components/Navbar'
 import getCurrentUser from './actions/getCurrentUser'
 import Script from 'next/script'
+import ToastProvider from './components/ToastProvider'
 
 // export const metadata: Metadata = {
 //   title: 'Create Next App',
@@ -19,6 +20,7 @@ export default async function RootLayout({
     <html lang="en">
       <body>
         <Navbar currentUser={currentUser} />
+        <ToastProvider />
         {children}
         <Script
   src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3833f59e6c01558d242adf410aa4a31e&libraries=services,clusterer&autoload=false"

@@ -4,6 +4,7 @@ import { User } from '@prisma/client';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useMemo } from 'react';
+import { toast } from 'react-toastify';
 
 interface UseFavoriteProps {
   productId: string;
@@ -23,7 +24,10 @@ const useFavorite = ({ productId, currentUser }: UseFavoriteProps) => {
     e.stopPropagation();
 
     console.log(currentUser, productId)
-    if (!currentUser) return;
+    if (!currentUser) {
+      toast.warning('먼저 로그인을 해주세요.')
+      return;
+    }
 
     try {
       let request;
@@ -37,9 +41,9 @@ const useFavorite = ({ productId, currentUser }: UseFavoriteProps) => {
 
       await request();
       router.refresh()
-
+      toast.success('성공했습니다.')
     } catch (err) {
-
+      toast.error('실패했습니다.')
     }
   }
 
