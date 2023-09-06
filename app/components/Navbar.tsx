@@ -31,12 +31,12 @@ const Navbar = ({currentUser}: NavbarProps) => {
         </div>
 
         <div className='hidden sm:block'>
-          <NavItem currentUser={currentUser} />
+          <NavItem currentUser={currentUser!} />
         </div>
       </div>
 
       <div className='block sm:hidden'>
-        {menu ? <NavItem mobile  currentUser={currentUser} /> : null}
+        {menu ? <NavItem mobile  currentUser={currentUser!} /> : null}
       </div>
     </nav>
   );
