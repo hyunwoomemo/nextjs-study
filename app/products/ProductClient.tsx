@@ -42,7 +42,7 @@ const ProductClient = ({ product, currentUser }: ProductClientProps) => {
             <ProductInfo
               user={product.user}
               category={category}
-              createAt={product.createdAt}
+              createdAt={product.createdAt}
               description={product.description}
             />
             <div>
