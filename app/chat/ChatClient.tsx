@@ -5,6 +5,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import useSWR from 'swr'
 import Contacts from '../components/chat/Contacts'
+import Chat from '../components/chat/Chat'
 
 interface ChatClientProps {
   currentUser?: User | null
@@ -47,7 +48,13 @@ const ChatClient = ({ currentUser }: ChatClientProps) => {
             setReceiver={setReceiver}
           />   
         </section>
-        <section className={`md:flex ${!layout && 'hidden'}`}>Chat Component</section>
+        <section className={`md:flex ${!layout && 'hidden'}`}>
+          <Chat
+            currentUser={currentUserWithMessage}
+            receiver={receiver}
+            setLayout={setLayout}
+          />
+        </section>
       </div>
     </main>
   )
