@@ -30,7 +30,7 @@ const User = ({
         <p className=' text-xs font-medium text-gray-600'>[이미지]</p>
         }
       </div>
-      <div>
+      <div className='flex justify-end text-xs to-gray-500'>
         {latestMessage && (
           <p>
             {fromNow(latestMessage.createdAt)}
