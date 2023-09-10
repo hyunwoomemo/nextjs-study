@@ -1,6 +1,7 @@
 import React from "react";
 import Avatar from "../Avatar";
 import { fromNow } from "@/helpers/dayjs";
+import Image from 'next/image';
 
 interface MessagePros {
   isSender: boolean;
@@ -26,6 +27,17 @@ const Message = ({ isSender, messageText, messageImage, receiverName, receiverIm
           <span className='font-medium'>{isSender ? "You" : receiverName}</span>
           <span className="text-xs to-gray-500 opacity-80">{fromNow(time)}</span>
         </div>
+        {messageImage && (
+          <div className='overflow-hidden rounded-md mx-[0.6rem]'>
+            <Image
+              src={messageImage}
+              width={300}
+              height={300}
+              alt=""
+            />
+          </div>
+
+        )}
         {messageText && (
           <div
             className={`p-2 break-all text-white rounded-lg
